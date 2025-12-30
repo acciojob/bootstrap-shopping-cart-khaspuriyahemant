@@ -5,32 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Bootstrap Shopping Cart Layout</title>
-      <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light background */
+        }
+        .block-heading {
+            text-align: center;
+            color: #3b99e0; /* Heading color */
+            margin-bottom: 20px; /* Space below heading */
+        }
+        .product {
+            margin-bottom: 20px; /* Space between product blocks */
+            border: 1px solid #ddd; /* Light border around product */
+            padding: 10px; /* Padding inside product block */
+            background-color: #fff; /* White background for product */
+        }
+        .summary {
+            border-top: 2px solid #5ea4f3; /* Top border color */
+            background-color: #f7fbff; /* Light background color */
+            padding: 20px; /* Padding inside summary block */
+            margin-top: 20px; /* Space above summary block */
+        }
+        .btn-primary {
+            background-color: #3b99e0; /* Button color */
+            border: none; /* Remove default border */
+        }
+        .img-fluid {
+            max-width: 100%; /* Ensure images are responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h2 class="block-heading">Shopping Cart</h2>
-		<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
         <div class="row">
             <div class="col-lg-8">
                 <!-- Product Block -->
                 <div class="product">
                     <div class="row">
                         <div class="col-6">
-                            <img src="https://tse2.mm.bing.net/th/id/OIP.RaoNOjhR-10yEYwpD-VlMAHaEK?pid=Api&P=0&h=180" class="img-fluid" alt="Product 1">
+                            <img src="https://via.placeholder.com/150" class="img-fluid" alt="Product 1">
+                            <p>Product 1</p>
+                            <p>Price: $10.00</p>
+                            <input type="number" value="1" class="quantity" min="1" onchange="updateTotal()">
                         </div>
                         <div class="col-6">
-                            <img src="https://tse2.mm.bing.net/th/id/OIP.RaoNOjhR-10yEYwpD-VlMAHaEK?pid=Api&P=0&h=180" class="img-fluid" alt="Product 2">
-                        </div>
-                    </div>
-                </div>
-                <div class="product">
-                    <div class="row">
-                        <div class="col-6">
-                            <img src="https://tse2.mm.bing.net/th/id/OIP.RaoNOjhR-10yEYwpD-VlMAHaEK?pid=Api&P=0&h=180" class="img-fluid" alt="Product 3">
-                        </div>
-                        <div class="col-6">
-                            <img src="https://tse2.mm.bing.net/th/id/OIP.RaoNOjhR-10yEYwpD-VlMAHaEK?pid=Api&P=0&h=180" class="img-fluid" alt="Product 4">
+                            <img src="https://via.placeholder.com/150" class="img-fluid" alt="Product 2">
+                            <p>Product 2</p>
+                            <p>Price: $15.00</p>
+                            <input type="number" value="1" class="quantity" min="1" onchange="updateTotal()">
                         </div>
                     </div>
                 </div>
@@ -39,12 +64,29 @@
             <div class="col-lg-4">
                 <div class="summary">
                     <h4>Price Summary</h4>
-                    <p>Total: $XX.XX</p>
+                    <p>Total: $<span id="totalPrice">25.00</span></p>
                     <button class="btn btn-primary">Checkout</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function updateTotal() {
+            const quantities = document.querySelectorAll('.quantity');
+            let total = 0;
+
+            // Prices of the products
+            const prices = [10.00, 15.00]; // Adjust based on the products
+
+            quantities.forEach((input, index) => {
+                total += input.value * prices[index];
+            });
+
+            // Update total price in the summary
+            document.getElementById('totalPrice').innerText = total.toFixed(2);
+        }
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
